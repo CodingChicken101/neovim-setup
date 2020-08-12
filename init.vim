@@ -8,13 +8,14 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'preservim/nerdcommenter'
 Plug 'mxw/vim-jsx'
 Plug 'jiangmiao/auto-pairs'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'joshdick/onedark.vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'tpope/vim-commentary'
+Plug 'othree/yajs.vim'
 call plug#end()
 
 
@@ -92,8 +93,9 @@ endif
 
 
 " --------------------- PRETTIER ---------------------- "
- let g:prettier#autoformat = 0
- autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 let g:prettier#config#tab_width = 2
 set smarttab
 set cindent
@@ -101,3 +103,25 @@ set tabstop=4
 set shiftwidth=2
 " always uses spaces instead of tab characters
 set expandtab
+
+
+" ----------------------- CUSTOM CONFIG ------------------------- "
+
+" Leader key
+let mapleader = ","
+
+" Quick Resize Window
+nnoremap <A-+> <C-w>+
+nnoremap <A--> <C-w>-
+
+" Moving line up and down
+nnoremap <A-Down> ddp
+nnoremap <A-Up> ddkP
+
+" Quick open init.vim for configuring
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Go to beginning and end of lines using L and H
+nnoremap H 0
+nnoremap L $
