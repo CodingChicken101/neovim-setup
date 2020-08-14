@@ -13,8 +13,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'joshdick/onedark.vim'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'tpope/vim-commentary'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'othree/yajs.vim'
 call plug#end()
 
@@ -46,7 +46,7 @@ set splitbelow
 tnoremap <Esc> <C-\><C-n>
 
 " start terminal in insert mode
-au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
 " open terminal on ctrl-n
 function! OpenTerminal()
@@ -107,6 +107,9 @@ set expandtab
 
 " ----------------------- CUSTOM CONFIG ------------------------- "
 
+" No line wrapping when working!!!
+autocmd BufWritePre, BufRead *.js,*.jsx setlocal nowrap
+
 " Leader key
 let mapleader = ","
 
@@ -115,8 +118,8 @@ nnoremap <A-+> <C-w>+
 nnoremap <A--> <C-w>-
 
 " Moving line up and down
-nnoremap <A-Down> ddp
-nnoremap <A-Up> ddkP
+nnoremap <leader>j ddp
+nnoremap <leader>k ddkP
 
 " Quick open init.vim for configuring
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
@@ -125,3 +128,21 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 " Go to beginning and end of lines using L and H
 nnoremap H 0
 nnoremap L $
+nnoremap 0 <nop>
+nnoremap $ <nop>
+
+" Quick escape insert and visual mode by pressing jk
+inoremap jk <esc>
+inoremap <esc> <nop>
+
+" Commenter for JSX file wrote by MYSELF
+augroup jsx_command
+  autocmd!
+  autocmd FileType javascript.jsx vnoremap <leader>cc <esc>`<i{/*<space><esc>`>a<space>*/}<esc>`<
+  autocmd FileType javascript.jsx vnoremap <leader>cu <esc>hhh4x'<4x
+  autocmd FileType javascript.jsx nnoremap <leader>cc I{/*<space><esc>A<space>*/}<esc>0w
+  autocmd FileType javascript.jsx nnoremap <leader>cu 0w4x$bh4x0w
+augroup END
+
+" Quick search the current word
+nnoremap <leader>/ /<C-r><C-w><ENTER>
