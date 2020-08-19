@@ -4,20 +4,41 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'airblade/vim-gitgutter'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'mxw/vim-jsx'
+Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'yuezk/vim-js'
+Plug 'othree/yajs.vim'
+Plug 'pangloss/vim-javascript'
 Plug 'jiangmiao/auto-pairs'
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'joshdick/onedark.vim'
 Plug 'tpope/vim-commentary'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'othree/yajs.vim'
+Plug 'rakr/vim-one'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'mhartington/oceanic-next'
+Plug 'jacoborus/tender.vim'
+Plug 'zefei/simple-dark'
+Plug 'franbach/miramare'
+Plug 'pgavlin/pulumi.vim'
+Plug 'sainnhe/sonokai'
 call plug#end()
 
+
+" ------------------ COLOR SCHEME -------------------- "
+
+colorscheme simple-dark
+syntax enable
+let g:lightline = { 'colorscheme': 'simple-dark' }
+let g:airline_theme = "simple-dark"
+syntax on
+  let g:oceanic_next_terminal_bold = 1
+  let g:oceanic_next_terminal_italic = 1
+if (has("termguicolors"))
+  set termguicolors
+endif
 
 " --------------------- NERDTree SETTINGS ------------------------ "
 
@@ -42,8 +63,9 @@ set splitbelow
 
 " ------------------- TERMINAL SETTINGS ------------------------ "
 
-" turn terminal to normal mode with escape
+" turn terminal to normal mode with escape or jk
 tnoremap <Esc> <C-\><C-n>
+tnoremap jk <C-\><C-n>
 
 " start terminal in insert mode
 autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
@@ -80,16 +102,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
 
 
-" ------------------ COLOR SCHEME -------------------- "
 
-set background=dark
-colorscheme onedark
-let g:lightline = { 'colorscheme': 'onedark' }
-let g:airline_theme = "onedark"
-let g:onedark_terminal_italics=1
-if (has("termguicolors"))
-  set termguicolors
-endif
 
 
 " --------------------- PRETTIER ---------------------- "
@@ -107,19 +120,29 @@ set expandtab
 
 " ----------------------- CUSTOM CONFIG ------------------------- "
 
+
+" Always show line numbers
+" set number
+
 " No line wrapping when working!!!
 autocmd BufWritePre, BufRead *.js,*.jsx setlocal nowrap
 
 " Leader key
 let mapleader = ","
 
-" Quick Resize Window
-nnoremap <A-+> <C-w>+
-nnoremap <A--> <C-w>-
+" Quick resize window
+nnoremap <left>  :3wincmd <<cr>
+nnoremap <right> :3wincmd ><cr>
+nnoremap <up>    :3wincmd +<cr>
+nnoremap <down>  :3wincmd -<cr>
 
-" Moving line up and down
-nnoremap <leader>j ddp
-nnoremap <leader>k ddkP
+" Moving a line up and down
+nnoremap <C-A-j> ddp
+nnoremap <C-A-k> ddkP
+
+" Copying a line up and down
+" nnoremap <C-S-j> yyp
+" nnoremap <C-S-k> yyP
 
 " Quick open init.vim for configuring
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
@@ -130,6 +153,14 @@ nnoremap H 0
 nnoremap L $
 nnoremap 0 <nop>
 nnoremap $ <nop>
+onoremap H 0
+onoremap L $
+onoremap 0 <nop>
+onoremap $ <nop>
+vnoremap H 0
+vnoremap L $
+vnoremap 0 <nop>
+vnoremap $ <nop>
 
 " Quick escape insert and visual mode by pressing jk
 inoremap jk <esc>
@@ -138,11 +169,12 @@ inoremap <esc> <nop>
 " Commenter for JSX file wrote by MYSELF
 augroup jsx_command
   autocmd!
-  autocmd FileType javascript.jsx vnoremap <leader>cc <esc>`<i{/*<space><esc>`>a<space>*/}<esc>`<
-  autocmd FileType javascript.jsx vnoremap <leader>cu <esc>hhh4x'<4x
-  autocmd FileType javascript.jsx nnoremap <leader>cc I{/*<space><esc>A<space>*/}<esc>0w
-  autocmd FileType javascript.jsx nnoremap <leader>cu 0w4x$bh4x0w
+  autocmd FileType javascript.jsx,javascriptreact vnoremap <leader>cc <esc>`<i{/*<space><esc>`>a<space>*/}<esc>`<
+  autocmd FileType javascript.jsx,javascriptreact vnoremap <leader>cu <esc>hhh4x'<4x
 augroup END
 
 " Quick search the current word
 nnoremap <leader>/ /<C-r><C-w><ENTER>
+
+" Disable highlight after searching
+nnoremap <leader>n :noh<ENTER>
