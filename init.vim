@@ -143,6 +143,10 @@ nnoremap <C-A-k> ddkP
 " Copying a line up and down
 " nnoremap <C-S-j> yyp
 " nnoremap <C-S-k> yyP
+ 
+" Copying and pasting to clipboard
+vnoremap <leader>y "*y 
+nnoremap <leader>p "*p 
 
 " Quick open init.vim for configuring
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
