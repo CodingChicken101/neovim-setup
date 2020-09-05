@@ -9,9 +9,10 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'tpope/vim-fugitive'
 Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'yuezk/vim-js'
-Plug 'othree/yajs.vim'
+Plug 'yuezk/vim-js' 
+Plug 'othree/yajs.vim' 
 Plug 'pangloss/vim-javascript'
+Plug 'mkitt/tabline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'tpope/vim-commentary'
@@ -23,16 +24,20 @@ Plug 'jacoborus/tender.vim'
 Plug 'zefei/simple-dark'
 Plug 'franbach/miramare'
 Plug 'pgavlin/pulumi.vim'
-Plug 'sainnhe/sonokai'
+Plug 'flrnd/candid.vim'
+Plug 'dunstontc/vim-vscode-theme'
+Plug 'fcpg/vim-orbital'
+Plug 'tjammer/blayu.vim'
+Plug 'morhetz/gruvbox'
 call plug#end()
 
 
 " ------------------ COLOR SCHEME -------------------- "
 
-colorscheme simple-dark
+colorscheme orbital
 syntax enable
-let g:lightline = { 'colorscheme': 'simple-dark' }
-let g:airline_theme = "simple-dark"
+let g:lightline = { 'colorscheme': 'orbital' }
+let g:airline_theme = "orbital"
 syntax on
   let g:oceanic_next_terminal_bold = 1
   let g:oceanic_next_terminal_italic = 1
@@ -100,9 +105,6 @@ let g:fzf_action = {
   \}
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
-
-
-
 
 
 " --------------------- PRETTIER ---------------------- "
@@ -182,3 +184,15 @@ nnoremap <leader>/ /<C-r><C-w><ENTER>
 
 " Disable highlight after searching
 nnoremap <leader>n :noh<ENTER>
+
+" Splitting windows easily
+nnoremap <leader>s :split<ENTER>
+nnoremap <leader>v :vsplit<ENTER>
+
+" Switch tab
+nnoremap <S-Tab> :tabprev<Return>
+nnoremap <Tab> :tabnext<Return>
+
+" Just show the filename (no path) in the tab
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_section_c = '%t'
