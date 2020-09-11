@@ -27,17 +27,17 @@ Plug 'pgavlin/pulumi.vim'
 Plug 'flrnd/candid.vim'
 Plug 'dunstontc/vim-vscode-theme'
 Plug 'fcpg/vim-orbital'
-Plug 'tjammer/blayu.vim'
+Plug 'tjammer/blayu.vim' "--- A bit faulty"
 Plug 'morhetz/gruvbox'
 call plug#end()
 
 
 " ------------------ COLOR SCHEME -------------------- "
 
-colorscheme orbital
+colorscheme gruvbox
 syntax enable
-let g:lightline = { 'colorscheme': 'orbital' }
-let g:airline_theme = "orbital"
+let g:lightline = { 'colorscheme': 'gruvbox' }
+let g:airline_theme = "gruvbox"
 syntax on
   let g:oceanic_next_terminal_bold = 1
   let g:oceanic_next_terminal_italic = 1
@@ -127,7 +127,7 @@ set expandtab
 " set number
 
 " No line wrapping when working!!!
-autocmd BufWritePre, BufRead *.js,*.jsx setlocal nowrap
+autocmd BufWritePre, BufRead *.js,*.jsx,*.javascriptreact,*.java setlocal nowrap
 
 " Leader key
 let mapleader = ","
